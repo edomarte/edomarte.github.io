@@ -1,11 +1,13 @@
 var users = {};
 var currentUser;
 var couponTypes = ["10% discount in shops", "free keychain", "5€ gift card"];
+var couponLocation;
 
 function loadingPage() {
     setEventListeners();
     setUsers();
     setParagCurrentUser();
+    userAlreadyPlayed();
 }
 
 function setUsers() {
@@ -20,31 +22,45 @@ function setEventListeners() {
         $("#form").on("submit", validateAndRegister);
     if (location.pathname.includes("login"))
         $("#form").on("submit", login);
-    if (location.pathname.includes("play"))
+    if (location.pathname.includes("play")) {
         $("#btnPlay").on("click", play);
-
-        $("#btnLogout").on("click", logout);
+        $("#btnChoice1").on("click", checkResult);
+        $("#btnChoice2").on("click", checkResult);
+        $("#btnChoice3").on("click", checkResult);
+    }
+    $("#btnLogout").on("click", logout);
 }
 
-function logout(){
-    currentUser=null;
-    sessionStorage.setItem('currentUser',null);
+
+
+function logout() {
+    currentUser = null;
+    sessionStorage.setItem('currentUser', null);
     alert("Logout successful!");
     window.location.replace("index.html");
 }
 
 function setParagCurrentUser() {
-    if (location.pathname.includes("index") && currentUser!=null)
+    if (location.pathname.includes("index") && currentUser != null)
         $("#pCurrentUser").text(currentUser.name);
+}
+
+function userAlreadyPlayed() {
+    if (location.pathname.includes("play") && currentUser != null)
+        if (!isAllowedToPlay()) {
+            $("#btnPlay").hide();
+
+        }
+    hideChoiceButtons();
 }
 
 function validateAndRegister(e) {
     e.preventDefault();
 
-    if (!checkIfUsernameAlreadyUsed())
-        if (validatePassword()) {
+    if (isUsernameFree())
+        if (isPasswordValid()) {
             users[$("#inputEmail").val()] = createUser();
-            sessionStorage.setItem("users", JSON.stringify(users));
+            setItemInSessionStorage("users", users);
             alert("Registration successful!");
             window.location.replace("login.html");
         }
@@ -52,8 +68,8 @@ function validateAndRegister(e) {
 }
 
 function createUser() {
-    var dateOf_Birth=new Date($("#inputBirth").val());
-    dateOf_Birth.setHours(0,0,0,0);
+    var dateOf_Birth = new Date($("#inputBirth").val());
+    dateOf_Birth.setHours(0, 0, 0, 0);
     return {
         email: $("#inputEmail").val(),
         password: $("#inputPassword").val(),
@@ -61,27 +77,29 @@ function createUser() {
         surname: $("#inputSurname").val(),
         dateOfBirth: dateOf_Birth,
         dateOfLastPlay: "",
-        gender:$('input[name="rGender"]:checked').val()
+        attemptsLeft: 3,
+        wonPrizes: 0,
+        gender: $('input[name="rGender"]:checked').val()
     }
 }
 
-function checkIfUsernameAlreadyUsed() {
+function isUsernameFree() {
 
     if (!jQuery.isEmptyObject(users))
         if (typeof users[$("#inputEmail").val()] !== 'undefined') {
-            alert("Username already in use! Chose another one.");
-            return true;
+            $("#userErrorplaceholder").text("Username already in use! Chose another one.");
+            return false;
         }
-    return false;
+    return true;
 }
 
-function validatePassword() {
+function isPasswordValid() {
     var isvalid = true;
     var pwd = $("#inputPassword").val();
 
     var errorMessage = "";
     if (pwd.length < 8 || pwd.length > 18) {
-        errorMessage += "The password is not between 8 and 18 characters).\n"
+        errorMessage += "The password is not between 8 and 18 characters.\n"
         isvalid = false;
     }
 
@@ -109,7 +127,7 @@ function validatePassword() {
         isvalid = false;
     }
     if (!isvalid)
-        alert(errorMessage);
+        $("#pwdErrorplaceholder").text(errorMessage);
 
     return isvalid;
 }
@@ -120,68 +138,114 @@ function login(e) {
     var pwd = $("#inputPassword").val();
 
     if (typeof users[email] === 'undefined')
-        alert("This email is not registred.");
+        $("#userErrorplaceholder").text("This email is not registred.");
     else
         if (users[email].password !== pwd)
-            alert("This password is incorrect.");
+            $("#pwdErrorplaceholder").text("This password is incorrect.");
         else {
             currentUser = users[email];
-            setItemInSessionStorage("currentUser", currentUser);
+            updateSessionCurrentUser();
             alert("Login Successful!");
             window.location.replace("index.html");
         }
 }
 
-function setItemInSessionStorage(key,value){
+function setItemInSessionStorage(key, value) {
     sessionStorage.setItem(key, JSON.stringify(value));
-
 }
 
 function play(e) {
-    if (checkIfCanPlay()){
-        $("#placeholder").text(extractCoupons());
-        updateUserlist();
+    //$("#placeholder").text(extractCoupons());
+    $("#btnPlay").hide();
+    setCouponLocation();
+    $("#placeholder").text("Guess under which card is the coupon! You have " + currentUser.attemptsLeft + " attempts for today.");
+    showChoiceButtons();
+}
+
+function checkResult(e) {
+    var choice = $(e.target).attr('choiceNum');
+    if (choice == couponLocation) {
+        $("#placeholder").text("You found the coupon!");
+        currentUser.wonPrizes++;
+    } else {
+        $("#placeholder").text("The coupon was under card " + (couponLocation + 1) + ".");
+    }
+
+    currentUser.attemptsLeft--;
+    $("#placeholder").append(" Attempts left for today: " + currentUser.attemptsLeft);
+
+
+
+    if (currentUser.attemptsLeft == 0)
+        actionsWhenAttemptsFinish();
+
+    updateSessionCurrentUser();
+    updateSessionUserlist();
+
+    setCouponLocation();
+}
+
+function actionsWhenAttemptsFinish() {
+    setDateOfLastPlayToToday();
+    $("#placeholder").append("<br></br><b>It was your last attempt for today! Come back tomorrow to play again.</b> " +
+        "<br></br>");
+    if (currentUser.wonPrizes > 0)
+        $("#placeholder").append("Here are the coupons you won today: " + extractCoupons());
+    hideChoiceButtons();
+}
+
+function showChoiceButtons() {
+    $("#btnChoice1").show();
+    $("#btnChoice2").show();
+    $("#btnChoice3").show();
+}
+
+function hideChoiceButtons() {
+    $("#btnChoice1").hide();
+    $("#btnChoice2").hide();
+    $("#btnChoice3").hide();
+}
+
+function setCouponLocation() {
+    couponLocation = randomNumberGen(1);
+}
+
+function isAllowedToPlay() {
+    return isLoggedIn() && notAlreadyPlayed() && isOver18();
+}
+
+function notAlreadyPlayed() {
+    var currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    var dateOfLastPlay = new Date(currentUser.dateOfLastPlay);
+    if (currentDate.getTime() == dateOfLastPlay.getTime()) {
+        $("#placeholder").text("You played already today! Come back tomorrow.");
+        return false;
+    } else {
+        currentUser.attemptsLeft = 3;
+        return true;
     }
 }
 
-function checkIfCanPlay() {
-    if (checkIfLoggedIn())
-        if (!checkIfAlreadyPlayed())
-            if (checkIfOver18())
-                return true;
-
-    return false;
-}
-
-function checkIfAlreadyPlayed() {
-    var currentDate = new Date();
-    currentDate.setHours(0,0,0,0);
-    var dateOfLastPlay = new Date(currentUser.dateOfLastPlay);
-    if (currentDate.getTime() == dateOfLastPlay.getTime()) {
-        alert("You played already today! Come back tomorrow.");
-        return true;
-    } else
-        return false;
-}
-
-function checkIfLoggedIn() {
+function isLoggedIn() {
     if (currentUser == null) {
         alert("You need to log in first.");
         window.location.replace("login.html");
+        return false;
     } else {
         return true;
-
     }
 }
 
-function checkIfOver18() {
+function isOver18() {
     var birthDate = new Date(currentUser.dateOfBirth);
     var currentDate = new Date();
 
+    //31556952000 is the number of milliseconds in an year
     if ((currentDate - birthDate) / 31556952000 >= 18)
         return true;
     else {
-        alert("You must be at least 18 years old to play.");
+        $("#placeholder").text("You must be at least 18 years old to play.");
         return false;
     }
 }
@@ -189,36 +253,42 @@ function checkIfOver18() {
 function extractCoupons() {
     var prizeMessage = "";
 
-    let currentDate=new Date();
-    currentDate.setHours(0,0,0,0);
-    currentUser.dateOfLastPlay = currentDate;
-
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < currentUser.wonPrizes; i++) {
         prizeMessage += assignPrize(randomNumberGen());
     }
     return prizeMessage;
 }
 
+function setDateOfLastPlayToToday() {
+    let currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    currentUser.dateOfLastPlay = currentDate;
+}
+
 function randomNumberGen() {
-    return Math.floor(Math.random(3)*3);
+    return Math.floor(Math.random(3) * 3);
 }
 
 function assignPrize(extractedNum) {
 
     switch (extractedNum) {
         case 0:
-            return "\nYou won a " + couponTypes[0];
+            return "You won a " + couponTypes[0] + "!<br></br>";
 
         case 1:
-            return "\nYou won a " + couponTypes[1];
+            return "You won a " + couponTypes[1] + "!<br></br>";
 
         case 2:
-            return "\nYou won a " + couponTypes[2];
+            return "You won a " + couponTypes[2] + "!<br></br>";
 
     }
 }
 
-function updateUserlist(){
-    users[currentUser.email]=currentUser;
+function updateSessionUserlist() {
+    users[currentUser.email] = currentUser;
     setItemInSessionStorage('users', users);
+}
+
+function updateSessionCurrentUser() {
+    setItemInSessionStorage('currentUser', currentUser);
 }
