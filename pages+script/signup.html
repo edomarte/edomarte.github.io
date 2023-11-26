@@ -5,8 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet"  href="../styles/style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gluten:wght@600&display=swap" rel="stylesheet">
 </head>
 <body onload="loadingPage()">
+
+        <!-- Top Navigation Bar JJ -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+            <div class="container-fluid">
+              <!-- The brand image or text -->
+              <a class="navbar-brand" href="#">Login</a>
+            
+              <!-- The toggler icon for <md sizes -->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            
+              <!-- The actual navigation -->
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <!--    nav -> item -> link     -->
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="play.html">Play</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="login.html">My Account</a>
+                  </li>
+                  
+                  </li>
+                </ul>
+              </div>
+        
+              <!-- logout button  -->
+              <li class="nav-item"> <button type="button" id="btnLogout">Logout</button>
+            
+            </div>
+          </nav>
+
+
     <div class="container text-center">
         <div class="row header">
             <div class="col">

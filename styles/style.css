@@ -5,7 +5,7 @@ body{
             );
     min-height: 100vh;
     margin: 0;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: stretch;
     font-family: 'Gluten';
