@@ -116,45 +116,52 @@ function isUsernameFree() {
 
 function isPasswordValid() {
     var isvalid = true;
+    resetLiPasswordRequirementColor(); // reset pwd requirement list color
     var pwd = $("#inputPassword").val();
 
-    // if any of the conditions is not respected, it sets the boolean variable isValid to false. It adds the error message for each detected error to the string errorMessage, so it can show the user all the issues at once.                   
+    // if any of the conditions is not respected, it sets the boolean variable isValid to false. 
+    // It colors the unrespected requirement message to red to highlight the missing requirement to the user.                   
 
-    var errorMessage = "";
-    if (pwd.length < 8 || pwd.length > 18) {
-        errorMessage += "The password is not between 8 and 18 characters.\n"
+    if (pwd.length < 8 || pwd.length > 18) {    // check pwd lenght
+        $("#liLenght").addClass("password_requirement_missing");
         isvalid = false;
     }
 
     var pattern = /[0-9]/g;
-    if (!pwd.match(pattern)) {
-        errorMessage += "The password doesn't contain at least a number.\n"
+    if (!pwd.match(pattern)) {      // check if pwd contains at least one number
+        $("#liNumber").addClass("password_requirement_missing");
         isvalid = false;
     }
 
     pattern = /[a-z]/g;
-    if (!pwd.match(pattern)) {
-        errorMessage += "The password doesn't contain at least a lower case letter.\n"
+    if (!pwd.match(pattern)) {      // check if pwd contains at least one lowercase character
+        $("#liLowerChar").addClass("password_requirement_missing");
         isvalid = false;
     }
 
     pattern = /[A-Z]/g;
-    if (!pwd.match(pattern)) {
-        errorMessage += "The password doesn't contain at least an upper case letter.\n"
+    if (!pwd.match(pattern)) {      // check if pwd contains at least one uppercase character
+        $("#liUpperChar").addClass("password_requirement_missing");
         isvalid = false;
     }
 
     pattern = /[@#$%^&-+=()]/g;
-    if (!pwd.match(pattern)) {
-        errorMessage += "The password doesn't contain one at least a special character @#$%^&-+=()."
+    if (!pwd.match(pattern)) {      // check if pwd contains at least one special character
+        $("#liSpecialChar").addClass("password_requirement_missing");
         isvalid = false;
     }
 
-
-    if (!isvalid) // if there is at least an error, it valorize the placeholder with the corrections to be made to the password.
-        $("#pwdErrorplaceholder").text(errorMessage);
-
     return isvalid;
+}
+
+// resetLiPasswordRequirementColor(): remove class .password_requirement_missing from the li element of the password requirement list #pwdRequirements in the signup page.
+
+function resetLiPasswordRequirementColor() {
+    $("#liLenght").removeClass("password_requirement_missing");
+    $("#liNumber").removeClass("password_requirement_missing");
+    $("#liUpperChar").removeClass("password_requirement_missing");
+    $("#liLowerChar").removeClass("password_requirement_missing");
+    $("#liSpecialChar").removeClass("password_requirement_missing");
 }
 
 // login(e): event fired by clicking on the 'btnLogin' in the login page.
