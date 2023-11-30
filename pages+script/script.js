@@ -9,7 +9,7 @@ function loadingPage() {
     setEventListeners();
     setUsers();
     setParagloggedInUser();
-    userAlreadyPlayed();
+    setPlayPage();
 }
 
 // setUsers(): get users array and loggedInUser value from sessionStorage, parse them through JSON, and assign them to the respective script variables.
@@ -57,14 +57,16 @@ function setParagloggedInUser() {
         $("#ploggedInUser").text("Hello " + loggedInUser.name + "!");
 }
 
-// userAlreadyPlayed(): check if the user already played.
+// setPlayPage(): set the components of the 'play' page depending on if the user is allowed to play.
 
-function userAlreadyPlayed() {
-    if (location.pathname.includes("play") && loggedInUser != null) // check if the page is 'play' and there is a logged in user ('loggedInUser')
-        if (!isAllowedToPlay()) { // runs the validation function isAllowedToPlay()
+function setPlayPage() {
+    if (location.pathname.includes("play")) { // check if the page is 'play'
+        hideChoiceButtons(); // it hides the choiceButtons, to be shown only after the 'play' button is clicked
+
+        if (!isAllowedToPlay())  // runs the validation function isAllowedToPlay()
             $("#btnPlay").hide(); // If the validation fails, it hides the 'btnPlay' button, otherwise it remains displayed.
-        }
-    hideChoiceButtons(); // it hides the choiceButtons, to be shown only after the 'play' button is clicked
+
+    }
 }
 
 // validateAndRegister(e): event fired when 'Register' button is clicked on the registration page.
