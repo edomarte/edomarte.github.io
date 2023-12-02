@@ -32,7 +32,7 @@ function setEventListeners() {
         $("#form").on("submit", login);
     // Play page
     if (location.pathname.includes("play")) {
-        $("#btnPlay").on("click", play);
+
         $("#btnChoice1").on("click", checkResult);
         $("#btnChoice2").on("click", checkResult);
         $("#btnChoice3").on("click", checkResult);
@@ -61,11 +61,10 @@ function setParagloggedInUser() {
 
 function setPlayPage() {
     if (location.pathname.includes("play")) { // check if the page is 'play'
-        hideChoiceButtons(); // it hides the choiceButtons, to be shown only after the 'play' button is clicked
-
         if (!isAllowedToPlay())  // runs the validation function isAllowedToPlay()
-            $("#btnPlay").hide(); // If the validation fails, it hides the 'btnPlay' button, otherwise it remains displayed.
-
+            hideChoiceButtons(); // it hides the choiceButtons, to be shown only after the 'play' button is clicked
+        else
+            play();
     }
 }
 
@@ -196,11 +195,11 @@ function setItemInSessionStorage(key, value) {
 
 // play(e): event fired by clicking on the 'btnPlay' in the play page.      
 
-function play(e) {
-    $("#btnPlay").hide(); // It hides the btnPlay
+function play() {
+
     setCouponLocation(); // set the coupon location for the current play round
     $("#placeholder").text("Guess under which card is the coupon! You have " + loggedInUser.attemptsLeft + " attempts for today."); // shows the instructions for playing and the attempts left in a placeholder (field in loggedInUser)
-    showChoiceButtons(); // Shows the choice (cards) buttons. 
+
 }
 
 // checkResult(e): event fired by clicking on the coupon cards. Check if the clicked card is the one associated with the coupon or not and inform the user.
