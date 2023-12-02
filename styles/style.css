@@ -1,8 +1,6 @@
-body{
-    background-image: 
-            linear-gradient(
-                to top right, #eca548, #f31010
-            );
+body {
+    background-image:
+        linear-gradient(to top right, #eca548, #f31010);
     min-height: 100vh;
     margin: 0;
     justify-content: center;
@@ -11,75 +9,76 @@ body{
     padding-bottom: 100px;
 }
 
-#terms{
+#terms {
     font-family: 'Varela Round';
     margin-left: 5%;
     margin-right: 5%;
     padding-top: 40px;
 }
 
-.navbar-toggler{
+.navbar-toggler {
 
     background-color: #eca548;
     border-color: #ec4848;
 }
 
-.navbar
-{
-    background-image: url('../img/cowabunga1.jpg'); 
+.navbar {
+    background-image: url('../img/cowabunga1.jpg');
     background-size: cover;
     background-position: left;
-    background-repeat: repeat; 
+    background-repeat: repeat;
     color: orange;
-    font-size:x-large;
-    margin:0;
+    font-size: x-large;
+    margin: 0;
 
 
 }
-.navbar-brand{
-    font-size:xx-large;
+
+.navbar-brand {
+    font-size: xx-large;
     color: orange;
     position: top;
 
 }
-    .slider{
+
+.slider {
     position: relative;
     width: 100%;
     height: 500px;
     overflow: hidden;
 }
 
-.nav-link{
+.nav-link {
 
-    color:#fff;
+    color: #fff;
 }
 
-#placeholder{
-    font-family:gluten;
-    font-size:xx-large;
+#placeholder {
+    font-family: gluten;
+    font-size: xx-large;
 }
 
-.btnLogout
-{
+.btnLogout {
     color: #eca548;
 }
 
-.col{
+.col {
 
     font-family: 'Grandstander';
     /* width: 70%; */
-    
+
 }
 
 
-.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
-    color:#f31010;
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+    color: #f31010;
 }
 
 
 
 
-    .item{
+.item {
     position: absolute;
     width: 400px;
     height: 400px;
@@ -91,7 +90,9 @@ body{
     left: calc(50% - 110px);
     top: 50px;
 }
-    #next, #prev{
+
+#next,
+#prev {
     position: absolute;
     top: 40%;
     color: #fff;
@@ -102,115 +103,116 @@ body{
     font-weight: bold;
     left: 200px;
 }
-    #next{
+
+#next {
     left: unset;
     right: 100px;
 }
 
-#logo{
-    background-color: rgba(255,255,255,0.5);
+#logo {
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 
-.password_requirement_missing{
-    color:rgb(0, 0, 255);
+.password_requirement_missing {
+    color: rgb(0, 0, 255);
 }
 
 
 @media (max-width: 1100px) {
 
 
-    
-    #next, #prev{
+
+    #next,
+    #prev {
         top: 90%;
         left: 60px;
     }
-        #next{
-        
+
+    #next {
+
         right: -100px;
     }
-        
-     
-      }
 
 
-
-
-.bigbutton{
-    font-size:24px;
-    text-align: left;
-    padding-left: 5px;
-   }
-
-
-
-.formsubmit{
-    padding-top:10px;
-    text-align:center;
 }
 
-.footer1{
-
-    /* text-align: fixed;
-    bottom:0;
-    width:100%;
-    padding-top:40%; */
 
 
+
+.bigbutton {
+    font-size: 24px;
+    text-align: left;
+    padding-left: 5px;
+}
+
+
+
+.formsubmit {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.footer1 {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 60px; /* Set the fixed height of the footer here */
-    line-height: 60px; /* Vertically center the text there */
+    height: 60px;
+    /* Set the fixed height of the footer here */
+    line-height: 60px;
+    /* Vertically center the text there */
     background-color: #f5f5f5;
-
-
 }
 
 
 html {
     position: relative;
     min-height: 100%;
-  }
-  body {
-    margin-bottom: 60px; /* Margin bottom by footer height */
-  }
-  .footer {
+}
+
+body {
+    margin-bottom: 60px;
+    /* Margin bottom by footer height */
+}
+
+.footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 60px; /* Set the fixed height of the footer here */
-    line-height: 60px; /* Vertically center the text there */
+    height: 60px;
+    /* Set the fixed height of the footer here */
+    line-height: 60px;
+    /* Vertically center the text there */
     background-color: rgba(0, 0, 0, 0.2);
     text-align: center;
     color: #fff;
-  }
+}
 
-#form{
+#form {
     text-align: left;
 }
 
-ul{
+ul {
 
     text-align: left;
- }
+}
 
- #playback{
+#playback {
     /* background-image: url("../img/cowabunga2.jpg");
     fill-opacity: 0.1; */
     background: linear-gradient(rgba(37, 36, 36, 0.425), rgba(37, 36, 36, 0.144)), url("../img/cowabunga2.jpg");
- }
+}
 
 
- #placeholder{
+#placeholder {
 
     color: #fff;
     padding-top: 60px;
- }
+}
 
 
- #playfoot{
+#playfoot {
 
     color: #fff;
 
- }
+}
