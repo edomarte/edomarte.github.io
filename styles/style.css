@@ -10,6 +10,16 @@ body{
     align-items: stretch;
     font-family: 'Gluten';
 }
+.navbar
+{
+    background-image: url('../img/cowabunga1.jpg'); 
+    background-size: cover;
+    background-position: left;
+    background-repeat: repeat; 
+    
+
+
+}
 .navbar-brand{
 
     position: top;
@@ -21,17 +31,33 @@ body{
     height: 500px;
     overflow: hidden;
 }
+
+
+@media (max-width: 768px) {
+    #slideimg {
+        width: auto;
+    height: auto;
+    text-align: justify;
+    background-color: #fff;
+    border-radius: 0px;
+    padding: 0px;
+    transition: 0.5s;
+    left: calc(50% - 110px);
+    top: 0;
+    }
+  }
+
     .item{
     position: absolute;
     width: 400px;
     height: 400px;
     text-align: justify;
     background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 0px;
+    padding: 0px;
     transition: 0.5s;
     left: calc(50% - 110px);
-    top: 0;
+    top: 50px;
 }
     #next, #prev{
     position: absolute;
@@ -42,10 +68,13 @@ body{
     font-size: xxx-large;
     font-family: 'Gluten';
     font-weight: bold;
-    left: 400px;
+    left: 200px;
 }
     #next{
     left: unset;
-    right: 400px;
+    right: 100px;
 }
 
+#logo{
+    background-color: rgba(255,255,255,0.5
+}

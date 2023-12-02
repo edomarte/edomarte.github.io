@@ -18,10 +18,13 @@
         
         </div>
 
-     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+     <nav class="navbar navbar-expand-md sticky-top">
         <div class="container-fluid">
           <!-- The brand image or text -->
-          <a class="navbar-brand" href="#">Gallery</a>
+          <a class="navbar-brand" href="#">COWABUNGA BURGER
+
+            <!-- <img clas=logo src="../img/neonburger.gif" alt="Cowabunga Burger"/> -->
+          </a>
         
           <!-- The toggler icon for <md sizes -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -55,17 +58,17 @@
 
     <div class="slider">
         <div class="item">
-            <img src="../img/burger1.jpeg" alt="Cowabunga Burger"/>
+            <img class="slideimg" src="../img/burger1.jpeg" alt="Cowabunga Burger"/>
             
         </div>
         <div class="item">
-            <img src="../img/burger2.jpeg" alt="Cowabunga Burger"/>
+            <img class="slideimg" src="../img/burger2.jpeg" alt="Cowabunga Burger"/>
         </div>
         <div class="item">
-            <img src="../img/burger3.jpeg" alt="Cowabunga Burger"/>
+            <img class="slideimg" src="../img/burger3.jpeg" alt="Cowabunga Burger"/>
         </div>
         <div class="item">
-            <img src="../img/burger4.jpeg" alt="Cowabunga Burger"/>
+            <img class="slideimg" src="../img/burger4.jpeg" alt="Cowabunga Burger"/>
         </div>
     
             
@@ -89,7 +92,7 @@
     let next = document.getElementById('next');
     let prev = document.getElementById('prev');
     
-    let active = 3;
+    let active = 1;
     function loadShow(){
         let stt = 0;
         items[active].style.transform = `none`;
