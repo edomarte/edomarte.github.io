@@ -1,111 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../styles/style.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <!-- <link rel="stylesheet"  href="../styles/style.css"/> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gluten:wght@600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gluten:wght@600&family=Grandstander:wght@500&display=swap"
+    rel="stylesheet">
 
-    <link rel="stylesheet"  href="../styles/style.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gluten:wght@600&display=swap" rel="stylesheet">
+
 </head>
+
 <body onload="loadingPage()">
 
-        <!-- Top Navigation Bar JJ -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-            <div class="container-fluid">
-              <!-- The brand image or text -->
-              <a class="navbar-brand" href="#">
-                <img>
-                
-              </img>
-                COWABUNG BURGER</a>
-            
-              <!-- The toggler icon for <md sizes -->
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-            
-              <!-- The actual navigation -->
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <!--    nav -> item -> link     -->
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="index.html">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="play.html">Play</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="login.html">My Account</a>
-                  </li>
-                  
-                  </li>
-                </ul>
-              </div>
-        
-              <!-- logout button  -->
-              <li class="nav-item"> <button type="button" id="btnLogout">Logout</button>
-            
-            </div>
-          </nav>
+  <nav class="navbar navbar-expand-md sticky-top">
+    <div class="container-fluid">
+      <!-- The brand image and text -->
+      <img class=logo src="../img/neonburgerLOGO.gif" alt="Cowabunga Burger" />
+      <a class="navbar-brand" href="#">COWABUNGA BURGER
 
 
-    <div class="container text-center">
-        <div class="row header">
-            <div class="col">
-                <a href="index.html"><button type="button">Home</button></a>
-                <a href="login.html"><button type="button">Login</button></a>
-                <button type="button" id="btnLogout">Logout</button></div>
-            </div>
-           
-        </div>
-        <div class="row content">
-            <div class="col">
-            <form method="post" id="form">
-                <label for="inputEmail" class="form-label">Email</label>
-                <input type="email" class="form-control"  name="Email" id="inputEmail" required>
-                <p id="userErrorplaceholder"></p>          
-                <label for="inputPassword" class="form-label">Password</label>
-                <input type="password" class="form-control"  name="Password" id="inputPassword" required>      
-                <p id="pwdErrorplaceholder"></p>          
-                <label for="inputName" class="form-label">Name</label>
-                <input type="text" class="form-control"  name="Name" id="inputName" required>
-                <label for="inputName" class="form-label">Surname</label>
-                <input type="text" class="form-control"  name="Surname" id="inputSurname" required>
-                <label for="inputBirth" class="form-label">Date of Birth</label>
-                <input type="date" class="form-control"  name="Date of Birth" id="inputBirth" required>
-                <legend>Gender</legend>
-                <fieldset>
-                    <label for="rMale" class="form-label" >Male</label>
-                    <input type="radio" value="Male" name="rGender" id="rMale" required>
-                    <label for="rFemale" class="form-label">Female</label>
-                    <input type="radio" value="Female" name="rGender" id="rFemale" required>
-                    <label for="rOther" class="form-label">Other</label>
-                    <input type="radio" value="Other" name="rGender" id="rOther" required>
-                    <label for="rNot" class="form-label">Prefer not to say</label>
-                    <input type="radio" value="Prefer not to say" name="rGender" id="rNot" required>
-                </fieldset>
-                <label for="inputTerms" class="form-label">Accept Terms and Conditions</label>
-                <input type="checkbox" class="form-check-input" name="Terms and Conditions" id="inputTerms" required>
-                <br>
-                <input type="submit" id="formSubmit" value="Sign Up!" >
-            </form>
-        </div>
-        </div>
-        <div class="row footer">
-            <p>footer</p>
-        </div>
+      </a>
+
+      <!-- The toggler icon for <md sizes -->
+      <button class="navbar-toggler" style="color:#f0440f" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- The actual navigation -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <!--    nav -> item -> link     -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="play.html">Play</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="termsAndConditions.html">Terms</a>
+          </li>
+
+        </ul>
       </div>
-      
 
-    <script src="script.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <!-- logout button  -->
+
+      <a class="nav-link" id="btnLogout">Logout</a>
+
+    </div>
+  </nav>
+
+
+
+  </div>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-2"> </div>
+    <div class="col-8"> 
+      <form method="post" id="form">
+        <label for="inputEmail" class="form-label">Email</label>
+        <input type="email" class="form-control" name="Email" id="inputEmail" required>
+        <p id="userErrorplaceholder"></p>
+        <label for="inputPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" name="Password" id="inputPassword" required>
+        <p id="pwdErrorplaceholder">The password must:
+        <ul id="pwdRequirements">
+          <li id="liLenght">Be between 8 and 18 characters</li>
+          <li id="liNumber">Contain at least a number</li>
+          <li id="liUpperChar">Contain at least an uppercase letter</li>
+          <li id="liLowerChar">Contain at least a lowercase letter</li>
+          <li id="liSpecialChar">Contain at least a special character between @#$%^&-+=()</li>
+        </ul>
+
+        </p>
+        <label for="inputName" class="form-label">Name</label>
+        <input type="text" class="form-control" name="Name" id="inputName" required>
+        <label for="inputName" class="form-label">Surname</label>
+        <input type="text" class="form-control" name="Surname" id="inputSurname" required>
+        <label for="inputBirth" class="form-label">Date of Birth</label>
+        <input type="date" class="form-control" name="Date of Birth" id="inputBirth" required>
+        <legend>Gender</legend>
+        <fieldset>
+          <label for="rMale" class="form-label">Male</label>
+          <input type="radio" value="Male" name="rGender" id="rMale" required>
+          <label for="rFemale" class="form-label">Female</label>
+          <input type="radio" value="Female" name="rGender" id="rFemale" required>
+          <label for="rOther" class="form-label">Other</label>
+          <input type="radio" value="Other" name="rGender" id="rOther" required>
+          <label for="rNot" class="form-label">Prefer not to say</label>
+          <input type="radio" value="Prefer not to say" name="rGender" id="rNot" required>
+        </fieldset>
+        <label for="inputTerms" class="form-label">Accept <a href="termsAndConditions.html"> Terms and Conditions</a>
+        </label>
+        <input type="checkbox" class="form-check-input" name="Terms and Conditions" id="inputTerms" required>
+        <br>
+        <input type="submit" id="formSubmit" value="Sign Up!">
+      </form>
+    </div>
+    <div class="col-2"> </div>
+  </div>
+  </div>
+
+
+ 
+
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">Copyright BurgerStories LTD 2023.</span>
+    </div>
+  </footer>
+
+
+
+
+
+  <script src="script.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
