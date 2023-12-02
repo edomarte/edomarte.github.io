@@ -48,7 +48,7 @@ function logout() {
         loggedInUser = null;
         sessionStorage.setItem('loggedInUser', null);
         alert("Logout successful!");
-        window.location.replace("index.html");
+        window.location.replace("../index.html");
     } else
         alert("You are not logged in.");
 
@@ -187,7 +187,7 @@ function login(e) {
             loggedInUser = users[email];
             updateSessionloggedInUser();
             alert("Login Successful!");
-            window.location.replace("index.html");
+            window.location.replace("../index.html");
         }
 }
 
