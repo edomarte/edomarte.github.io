@@ -50,7 +50,7 @@ function logout() {
         loggedInUser = null;
         sessionStorage.setItem('loggedInUser', null);
         alert("Logout successful!");
-        if (location.pathname.includes("index") || location.pathname.match("/")) // the location should be the index. When github pages opens the index for the first time, the pathname is /.
+        if (location.pathname.includes("index") || location.pathname === ("/")) // the location should be the index. When github pages opens the index for the first time, the pathname is /.
             window.location.replace("index.html");
         else
             window.location.replace("../index.html");
@@ -381,7 +381,7 @@ function updateSessionloggedInUser() {
 }
 
 function loadGallery() {
-    if (location.pathname.includes("index") || location.pathname.match("/")) // the location should be the index. When github pages opens the index for the first time, the pathname is /.
+    if (location.pathname.includes("index") || location.pathname === ("/")) // the location should be the index. When github pages opens the index for the first time, the pathname is /.
         loadShow();
 }
 
