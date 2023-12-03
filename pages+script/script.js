@@ -2,14 +2,16 @@ var users = {}; // array that contains the registred users
 var loggedInUser; // logged in user
 var couponTypes = ["10% discount in shops", "free keychain", "5€ gift card"]; // Coupons that can be extracted
 var couponLocation; // stores the position of the coupon in the current extraction
+var active = 1;
+
 
 // loadingPage(): runs every time a page is loaded to initialize variables, set users, assign value to the placeholder in home, and check if user already played.
 
 function loadingPage() {
     setEventListeners();
     setUsers();
-    setParagloggedInUser();
     setPlayPage();
+    loadGallery();
 }
 
 // setUsers(): get users array and loggedInUser value from sessionStorage, parse them through JSON, and assign them to the respective script variables.
@@ -48,17 +50,13 @@ function logout() {
         loggedInUser = null;
         sessionStorage.setItem('loggedInUser', null);
         alert("Logout successful!");
-        window.location.replace("../index.html");
+        if (location.pathname.includes("index"))
+            window.location.replace("index.html");
+        else
+            window.location.replace("../index.html");
     } else
         alert("You are not logged in.");
 
-}
-
-// setParagloggedInUser(): set the value for the placeholder in the homepage to the name of the logged in user.
-
-function setParagloggedInUser() {
-    if (location.pathname.includes("index") && loggedInUser != null)
-        $("#ploggedInUser").text("Hello " + loggedInUser.name + "!");
 }
 
 // setPlayPage(): set the components of the 'play' page depending on if the user is allowed to play.
@@ -173,6 +171,11 @@ function resetLiPasswordRequirementColor() {
 
 function login(e) {
     e.preventDefault();
+
+    // reset error placeholders
+    $("#userErrorplaceholder").text("");
+    $("#pwdErrorplaceholder").text("");
+
     // get the values from the input form
     var email = $("#inputEmail").val();
     var pwd = $("#inputPassword").val();
@@ -377,14 +380,17 @@ function updateSessionloggedInUser() {
     setItemInSessionStorage('loggedInUser', loggedInUser);
 }
 
+function loadGallery() {
+    if (location.pathname.includes("index")) {
+        loadShow();
+    }
+}
 
-
-let items = document.querySelectorAll('.slider .item');
-let next = document.getElementById('next');
-let prev = document.getElementById('prev');
-
-let active = 1;
 function loadShow() {
+    var items = document.querySelectorAll('.slider .item');
+    var next = document.getElementById('next');
+    var prev = document.getElementById('prev');
+
     let stt = 0;
     items[active].style.transform = `none`;
     items[active].style.zIndex = 1;
@@ -405,13 +411,13 @@ function loadShow() {
         items[i].style.filter = 'blur(5px)';
         items[i].style.opacity = stt > 2 ? 0 : 0.6;
     }
-}
-loadShow();
-next.onclick = function () {
-    active = active + 1 < items.length ? active + 1 : active;
-    loadShow();
-}
-prev.onclick = function () {
-    active = active - 1 >= 0 ? active - 1 : active;
-    loadShow();
+
+    next.onclick = function () {
+        active = active + 1 < items.length ? active + 1 : active;
+        loadShow();
+    }
+    prev.onclick = function () {
+        active = active - 1 >= 0 ? active - 1 : active;
+        loadShow();
+    }
 }
