@@ -50,7 +50,7 @@ function logout() {
         loggedInUser = null;
         sessionStorage.setItem('loggedInUser', null);
         alert("Logout successful!");
-        if (location.pathname.includes("index"))
+        if (location.pathname.includes("index") || location.pathname.endsWith("github.io"))
             window.location.replace("index.html");
         else
             window.location.replace("../index.html");
@@ -381,9 +381,8 @@ function updateSessionloggedInUser() {
 }
 
 function loadGallery() {
-    if (location.pathname.includes("index")) {
+    if (location.pathname.includes("index") || location.pathname.endsWith("github.io"))
         loadShow();
-    }
 }
 
 function loadShow() {
